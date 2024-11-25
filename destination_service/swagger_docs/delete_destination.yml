@@ -1,0 +1,49 @@
+tags:
+  - Destinations
+summary: Delete a specific travel destination
+description: Remove a destination from the system. Only accessible by Admin users.
+parameters:
+  - name: Authorization
+    in: header
+    required: true
+    schema:
+      type: string
+    description: Bearer token obtained after login.
+  - name: destination_id
+    in: path
+    type: integer
+    required: true
+    description: The ID of the destination to delete
+responses:
+  200:
+    description: Destination successfully deleted
+    schema:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Destination deleted successfully."
+  401:
+    description: Unauthorized - No valid JWT token provided
+    schema:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Missing Authorization Header"
+  403:
+    description: Forbidden - Admin access required
+    schema:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "You do not have permission to perform this action."
+  404:
+    description: Destination not found
+    schema:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Destination with given ID not found."

@@ -1,0 +1,27 @@
+tags:
+  - Destinations
+summary: Retrieve all destinations
+description: Get a list of all available travel destinations.
+parameters:
+  - name: Authorization
+    in: header
+    required: true
+    schema:
+      type: string
+    description: Bearer token obtained after login.
+responses:
+  200:
+    description: A list of travel destinations
+    schema:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+          name:
+            type: string
+          description:
+            type: string
+          location:
+            type: string

@@ -1,0 +1,65 @@
+tags:
+  - Users
+summary: Register a new user.
+description: Create a new user by providing name, email, password, and role.
+parameters:
+  - name: body
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - name
+        - email
+        - password
+        - role
+      properties:
+        name:
+          type: string
+          example: John Doe
+          description: The full name of the user.
+        email:
+          type: string
+          example: johndoe@example.com
+          description: The user's email address.
+        password:
+          type: string
+          example: strongpassword123
+          description: The user's password.
+        role:
+          type: string
+          enum: [Admin, User]
+          example: Admin
+          description: The user's role (Admin or User).
+responses:
+  201:
+    description: User registered successfully.
+    schema:
+      type: object
+      properties:
+        message:
+          type: string
+          example: User registered successfully.
+        user:
+          type: object
+          properties:
+            id:
+              type: string
+              example: 1
+            name:
+              type: string
+              example: John Doe
+            email:
+              type: string
+              example: johndoe@example.com
+            role:
+              type: string
+              example: Admin
+  400:
+    description: Validation error due to missing fields, invalid email, or duplicate email.
+    schema:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Email already exists or invalid input."

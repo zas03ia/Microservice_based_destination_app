@@ -1,0 +1,55 @@
+tags:
+  - Auth
+summary: Validate a user's role.
+description: Validate if the current user's role matches the required role provided in the request body. This endpoint uses JWT authentication.
+parameters:
+  - name: Authorization
+    in: header
+    required: true
+    type: string
+    description: Bearer token obtained after login.
+  - name: body
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - role
+      properties:
+        role:
+          type: string
+          example: Admin
+          description: The required role to validate against the user's role.
+responses:
+  200:
+    description: Role validated successfully.
+    schema:
+      type: object
+      properties:
+        valid:
+          type: boolean
+          example: true
+  400:
+    description: Missing the role in the request body.
+    schema:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Role is required."
+  403:
+    description: The user's role does not match the required role.
+    schema:
+      type: object
+      properties:
+        valid:
+          type: boolean
+          example: false
+  401:
+    description: Unauthorized (missing or invalid token).
+    schema:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Missing or invalid token."

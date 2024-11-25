@@ -1,0 +1,51 @@
+tags:
+  - Users
+summary: Get user profile information.
+description: Retrieve the profile information of the currently logged-in user using JWT authentication.
+parameters:
+  - name: Authorization
+    in: header
+    required: true
+    schema:
+      type: string
+    description: Bearer token obtained after login.
+responses:
+  200:
+    description: Successfully retrieved user profile.
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            id:
+              type: string
+              example: 1
+            name:
+              type: string
+              example: John Doe
+            email:
+              type: string
+              example: johndoe@example.com
+            role:
+              type: string
+              example: Admin
+  401:
+    description: Unauthorized (missing or invalid token).
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            error:
+              type: string
+              example: "Missing or invalid token."
+  404:
+    description: User not found.
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            error:
+              type: string
+              example: "User not found."

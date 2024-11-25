@@ -1,0 +1,50 @@
+tags:
+  - Users
+summary: User login and access token generation.
+description: Authenticate a user using email and password, and return a JWT access token.
+parameters:
+  - name: body
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          example: johndoe@example.com
+          description: The user's email address.
+        password:
+          type: string
+          example: strongpassword123
+          description: The user's password.
+responses:
+  200:
+    description: Login successful with access token.
+    schema:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Login successful.
+        access_token:
+          type: string
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  400:
+    description: Missing required fields (email or password) or invalid email format.
+    schema:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Email and password are required."
+  401:
+    description: Invalid email or password.
+    schema:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Invalid email or password."
